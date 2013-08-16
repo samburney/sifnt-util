@@ -1,0 +1,17 @@
+{
+    "name": "sifnt/sifnt-util",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Sam Burney",
+            "email": "sam.burney@air-stream.org"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": ["sU.php"]
+    }
+}
