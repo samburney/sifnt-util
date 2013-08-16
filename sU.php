@@ -14,7 +14,7 @@ class sU
 	}
 
 	// Convert Bytes to prettier number
-	function bytesToSize($bytes, $precision = 2, $multiplier = 1024)
+	public static function bytesToSize($bytes, $precision = 2, $multiplier = 1024)
 	{  
 	    $kilobyte = $multiplier;
 	    $megabyte = $kilobyte * $multiplier;
