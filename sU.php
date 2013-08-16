@@ -25,7 +25,7 @@ class sU
 	        return $bytes . ' B';
 	 
 	    } elseif (($bytes >= $kilobyte) && ($bytes < $megabyte)) {
-	        return round($bytes / $kilobyte, $precision) . ' KB';
+	        return round($bytes / $kilobyte, $precision) . ' kB';
 	 
 	    } elseif (($bytes >= $megabyte) && ($bytes < $gigabyte)) {
 	        return round($bytes / $megabyte, $precision) . ' MB';
