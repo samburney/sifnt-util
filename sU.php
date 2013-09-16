@@ -83,5 +83,20 @@ class sU
 			return $d;
 		}
 	}
-	 
+	
+	// Check if IPv4 address is in given prefix
+	public static function inIpPrefix($cidr, $ip)
+	{
+		list($prefix, $subnet) = explode('/', $cidr);
+
+		$subnet_bin = str_pad('', $subnet, '1') . str_pad('', 32 - $subnet, '0');
+
+		$prefix_dec = ip2long($prefix);
+		$prefix_bin = str_pad(decbin($prefix_dec), '32', '0', STR_PAD_LEFT) & $subnet_bin;
+
+		$ip_dec = ip2long($ip);
+		$ip_bin = str_pad(decbin($ip_dec), '32', '0', STR_PAD_LEFT);
+
+		return $prefix_bin == ($ip_bin & $subnet_bin);
+	}
 }
