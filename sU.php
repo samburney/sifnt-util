@@ -40,6 +40,36 @@ class sU
 	    }
 	}
 	
+	// Convert prettier number to bytes
+	public static function sizeToBytes($size, $multiplier = 1024)
+	{  
+		preg_match('/([.0-9]+) *(|[kmgt])(|ib|b)$/i', $size, $result);
+		
+		$number = $result[1];
+		$unit = strtolower($result[2]);
+
+		switch($unit) {
+			case 'k':
+				return $number * $multiplier;
+				break;
+
+			case 'm':
+				return $number * $multiplier * $multiplier;
+				break;
+
+			case 'g':
+				return $number * $multiplier * $multiplier * $multiplier;
+				break;
+
+			case 't':
+				return $number * $multiplier * $multiplier * $multiplier * $multiplier;
+				break;
+
+			default:
+				return $number;
+		}
+	}
+
 	/*
 	 * Function to Convert stdClass Objects to Multidimensional Arrays
 	 * http://www.if-not-true-then-false.com/2009/php-tip-convert-stdclass-object-to-multidimensional-array-and-convert-multidimensional-array-to-stdclass-object/
