@@ -145,4 +145,30 @@ class sU
 
 		return $prefix_bin == ($ip_bin & $subnet_bin);
 	}
+
+	// Convert CIDR notation to Address + Subnet Mask
+	public static function cidrToSubnet($cidr) {
+		list($prefix, $subnet) = explode('/', $cidr);
+
+		$subnet_bin = str_pad('', $subnet, '1') . str_pad('', 32 - $subnet, '0');
+		$subnet_dec = bindec($subnet_bin);
+		$subnet_mask = long2ip($subnet_dec);
+
+		return "$prefix $subnet_mask";
+	}
+
+	// Convert Subnet mask to Wildcard mask
+	public static function subnetToWildcardMask($subnet_mask) {
+		$subnet_dec = ip2long($subnet_mask);
+		$subnet_bin = str_pad(decbin($subnet_dec), '32', '0', STR_PAD_LEFT);
+
+		$wildcard_bin = str_replace('0', '2', $subnet_bin);
+		$wildcard_bin = str_replace('1', '0', $wildcard_bin);
+		$wildcard_bin = str_replace('2', '1', $wildcard_bin);
+
+		$wildcard_dec = bindec($wildcard_bin);
+		$wildcard_mask = long2ip($wildcard_dec);
+
+		return $wildcard_mask;
+	}	
 }
