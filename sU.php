@@ -170,5 +170,13 @@ class sU
 		$wildcard_mask = long2ip($wildcard_dec);
 
 		return $wildcard_mask;
+	}
+
+	// Get number of week in a month - https://stackoverflow.com/questions/32615861/get-week-number-in-month-from-date-in-php/32624747
+	public static function weekOfMonth($date) {
+	    //Get the first day of the month.
+	    $firstOfMonth = strtotime(date("Y-m-01", $date));
+	    //Apply above formula.
+	    return intval(date("W", $date)) - intval(date("W", $firstOfMonth)) + 1;
 	}	
 }
