@@ -157,6 +157,22 @@ class sU
 		return "$prefix $subnet_mask";
 	}
 
+	// Convert CIDR notation to first Subnet ID
+	public static function cidrToSubnetId($cidr)
+	{
+		list($prefix, $subnet) = explode('/', $cidr);
+
+		$subnet_bin = str_pad('', $subnet, '1') . str_pad('', 32 - $subnet, '0');
+
+		$prefix_dec = ip2long($prefix);
+		
+		$subnetid_bin = str_pad(decbin($prefix_dec), '32', '0', STR_PAD_LEFT) & $subnet_bin;
+		$subnetid_dec = bindec($subnetid_bin);
+		$subnetid = long2ip($subnetid_dec);
+
+		return($subnetid . '/' . $subnet);
+	}
+
 	// Convert Subnet mask to Wildcard mask
 	public static function subnetToWildcardMask($subnet_mask) {
 		$subnet_dec = ip2long($subnet_mask);
